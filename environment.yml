@@ -1,0 +1,7 @@
+name: covid-analytics
+dependencies:
+  - python>=3.4 
+  - bokeh
+  - numpy
+  - pandas
+  - jupyter
