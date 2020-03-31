@@ -62,6 +62,8 @@ def gen_covid_html(param_dict):
                 daily = ce.covid_province_state(covid, param_dict['state'])
             if 'country' in param_dict.keys():
                 daily = ce.covid_country_region(covid, param_dict['country'])
+            if 'query' in param_dict.keys():
+                daily = ce.covid_query(covid, param_dict['query'])
             recs.append(daily)
         except:
             print(f)
@@ -87,6 +89,10 @@ def gen_covid_html(param_dict):
     elif param_dict['html']['img_shape'] == 'wide':
         iheight = 200
         iwidth = 275
+    elif param_dict['html']['img_shape'] == 'square':
+        iheight = 200
+        iwidth = 200
+
     update = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     # render everything together

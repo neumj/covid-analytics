@@ -10,7 +10,10 @@ def covid_dict_to_timeseries_df(ps_dict,start_date,end_date):
     tc = final - initial
     tc = np.insert(tc,0,0)
     df['total_change'] = tc
-    denom = initial[np.where(initial==0)]=np.nan
+    #check for zero in demon
+    idx=np.where(initial == 0)
+    if idx[0].size!=0:
+        denom = initial[np.where(initial==0)]=np.nan
     pc = ((final - initial) / initial) * 100
     pc = np.insert(pc,0,0)
     df['percent_change'] = pc
