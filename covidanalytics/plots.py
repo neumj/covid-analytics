@@ -1,6 +1,8 @@
 from bokeh.plotting import figure
 from bokeh.io import show, output_notebook
 from bokeh.models import ColumnDataSource, HoverTool
+from covidanalytics import analytics as ca
+import numpy as np
 
 
 def plot_total_cases(ts_df ,title='World' ,show_plot=True):
@@ -38,6 +40,11 @@ def plot_total_cases(ts_df ,title='World' ,show_plot=True):
            y='deaths',
            color='darkgray',
            legend_label='Deaths')
+    p.line(source=src,
+           x='index',
+           y='confirmed',
+           color='blue',
+           legend_label='Confirmed Cases')
     p.circle(source=src,
              x='index',
              y='deaths',
@@ -125,7 +132,15 @@ def plot_total_change(ts_df ,title='World' ,show_plot=True):
            x='index',
            top='total_change',
            width=0.5,
-           color='blue')
+           color='blue',
+           legend_label='Actual Change')
+    p.line(source=src,
+           x='index',
+           y='7day_fit_m',
+           color='red',
+           legend_label='7-day Fit')
+
+    p.legend.location = "top_left"
     p.xgrid.grid_line_color = None
     p.y_range.start = 0
 
