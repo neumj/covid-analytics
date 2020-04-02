@@ -133,12 +133,19 @@ def plot_total_change(ts_df ,title='World' ,show_plot=True):
            top='total_change',
            width=0.5,
            color='blue',
-           legend_label='Actual Change')
-    p.line(source=src,
-           x='index',
-           y='7day_fit_m',
-           color='red',
-           legend_label='7-day Fit')
+           legend_label='Cases')
+    if ts_df.shape[0] >= 14:
+        p.line(source=src,
+               x='index',
+               y='7day_fit_m',
+               color='red',
+               legend_label='7-day Fit')
+
+        hover = HoverTool(tooltips=[('7-day Fit: ', '@7day_fit_m')])
+
+        # Add the hover tool to the graph
+        p.add_tools(hover)
+
 
     p.legend.location = "top_left"
     p.xgrid.grid_line_color = None
