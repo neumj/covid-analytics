@@ -27,18 +27,19 @@ template = Template(
                 <div class="grid-container">
                     <div class="grid-infog">
                         <img src="../images/{{ png }}" height={{ iheight }} width={{ iwidth }} class="gpx" />
-                        <p>{{ hdr }}</p>
+                        <p><u>{{ hdr }}</u></p>
                         <p>{{ cases }}</p>
+                        <p>{{rate}}</p>                        
                         <p>{{ deaths }}</p>
                     </div>           
                     <div class="embed-wrapper">
                         {{ div_cc }}
                     </div>            
                     <div class="embed-wrapper">
-                        {{ div_pc }}
+                        {{ div_tc }}
                     </div>
                     <div class="embed-wrapper">
-                        {{ div_tc }}
+                        {{ div_pc }}
                     </div>
                 </div>
                 <div class="footer">
@@ -79,8 +80,12 @@ def gen_covid_html(param_dict):
     resources_pc = CDN.render()
     script_tc, div_tc = components(tc)
     resources_tc = CDN.render()
-    cases = "Cases: " + str(int(covid_ts['confirmed'].max()))
-    deaths = "Deaths: " + str(int(covid_ts['deaths'].max()))
+    cases = "{:,}".format(int(covid_ts['confirmed'].max())) + " cases."
+    deaths = "{:,}".format(int(covid_ts['deaths'].max())) + " deaths."
+    if covid_ts.shape[0] >= 14:
+        rate = "{:,}".format(int(covid_ts['7day_fit_m'][-1])) + " cases per day."
+    else:
+        rate = "{:,}".format(int(covid_ts['total_change'][-1])) + " cases per day."
     hdr = param_dict['title']
     png = param_dict['html']['img']
     if param_dict['html']['img_shape'] == 'tall':
@@ -112,7 +117,8 @@ def gen_covid_html(param_dict):
                            png=png,
                            iheight=iheight,
                            iwidth=iwidth,
-                           update=update
+                           update=update,
+                           rate=rate
                            )
     # write
     with open(param_dict['html']['dir'], 'w') as f:
