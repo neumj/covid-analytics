@@ -12,8 +12,8 @@ def plot_total_cases(ts_df ,title='World' ,show_plot=True):
     title_str = 'COVID-19 Cases'
 
     # Create a blank figure with labels
-    p = figure(plot_width=425 ,
-               plot_height=425,
+    p = figure(plot_width=475 ,
+               plot_height=475,
                title=title_str,
                x_axis_label='Date',
                y_axis_label='Number',
@@ -85,7 +85,7 @@ def plot_percent_change(ts_df ,title='World' ,show_plot=True):
     title_str = 'Percent Change in Confirmed Cases'
 
     # Create a blank figure with labels
-    p = figure(plot_width=425 ,plot_height=425,
+    p = figure(plot_width=475 ,plot_height=475,
                title=title_str,
                x_axis_label='Date',
                y_axis_label='Percent Change',
@@ -122,7 +122,7 @@ def plot_total_change(ts_df ,title='World' ,show_plot=True):
     title_str = 'Change in Confirmed Cases'
 
     # Create a blank figure with labels
-    p = figure(plot_width=425 ,plot_height=425,
+    p = figure(plot_width=475 ,plot_height=475,
                title=title_str,
                x_axis_label='Date',
                y_axis_label='Number of Cases',
